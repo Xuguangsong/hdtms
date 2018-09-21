@@ -97,6 +97,12 @@
     from task
     where t_pk_id = #{tPkId,jdbcType=INTEGER}
   </select>
+  <select id="selectBytTaskId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from task
+    where t_task_id = #{tTaskId,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from task
     where t_pk_id = #{tPkId,jdbcType=INTEGER}

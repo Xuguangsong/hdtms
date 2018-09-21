@@ -23,6 +23,8 @@ public interface TaskMapper {
 
     Task selectByPrimaryKey(Integer tPkId);
 
+    Task selectBytTaskId(String tTaskId);
+
     int updateByExampleSelective(@Param("record") Task record, @Param("example") TaskExample example);
 
     int updateByExample(@Param("record") Task record, @Param("example") TaskExample example);

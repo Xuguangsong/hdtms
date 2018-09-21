@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 @Controller
@@ -25,17 +26,34 @@ public class TaskAssigned {
 
     @ResponseBody
     @RequestMapping("op_task_assigned")
-    public AjaxResultPo TaskAssigned(String tTaskId, String tTutorId,String tName,String StuName,String tStartDate) throws ParseException {
-        logger.info("进入控制器：op_add_task"+tTaskId+tName+tTutorId+StuName+tStartDate);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    public AjaxResultPo TaskAssigned(String tTaskId, String tStuId,String tStartDate) throws ParseException {
+        logger.info("进入控制器：op_task_assigned"+tTaskId+tStuId+tStartDate);
+        TaskUsing taskUsing = TtoTU(tTaskId, tStuId,tStartDate);
+        taskService.insertUsing(taskUsing);
+        return new AjaxResultPo(true);
+    }
+    public TaskUsing TtoTU(String tTaskId, String tStuId,String tStartDate ) throws ParseException {
+        SimpleDateFormat format  = new SimpleDateFormat("yyyy-MM-dd");
         TaskUsing record = new TaskUsing();
+        Task task = taskService.selectBytTaskId(tTaskId);
         record.settTaskId(tTaskId);
-        record.settTutorId(tTutorId);
-        record.settName(tName);
-        record.settStuId("vw14344t42b");
-        record.settStartDate(sdf.parse(tStartDate));
-        int res = taskService.insertUsing(record);
-        logger.info("msg : "+ res);
-        return new AjaxResultPo(true, res);
+        record.settTutorId(task.gettTutorId());
+        record.settStuId(tStuId);
+        record.settName(task.gettName());
+        record.settCategory(task.gettCategory());
+        record.settContent(task.gettContent());
+        record.settProgress(0);
+        record.settTime(task.gettTime());
+        Date TStartDate = format.parse(tStartDate);
+        record.settStartDate(TStartDate);
+        Calendar ca = Calendar.getInstance();
+        ca.add(Calendar.DATE, task.gettTime());// num为增加的天数，可以改变的
+        TStartDate = ca.getTime();
+        record.settExpirationDate(TStartDate);
+        record.settCreater(task.gettCreater());
+        record.settCreateTime(new Date());
+        record.settOperator(task.gettCreater());
+        record.settOperateDate(new Date());
+        return  record;
     }
 }

@@ -80,4 +80,9 @@ public class TaskService implements ITaskService {
         return taskUsingMapper.insert(record);
     }
 
+    @Override
+    public Task selectBytTaskId(String tTaskId) {
+        return taskMapper.selectBytTaskId(tTaskId);
+    }
+
 }

@@ -53,11 +53,10 @@
         }
         function grantTask() {
                 var grantTask = {
-                    tTaskId:$("e8d837502f51407c8c8da7802ef500a2").val(),
-                    tTutorId:$("d966ff39fbdf49469dd90afeb5daae0d").val(),
-                    tName: $("#taskName").val(),
-                    StuName:$("#StuName").val(),
+                    tTaskId:("90585eb948a6451d8645ac1c4cfef2b1").toString(),
+                    tStuId:("d966ff39fbdf49469dd90afeb5daae0d").toString(),
                     tStartDate:$("#tStartDate").val(),
+
                 };
             $.ajax({
                 type: 'post',
@@ -68,8 +67,10 @@
                 cache: false,
                 data: grantTask,
                 success: function(){
+                    alert(grantTask.tTaskId)
                     alert('分配成功！');
                 },error : function() {
+                    alert(grantTask.tTaskId)
                     alert('新建失败！');
                 }
             });

@@ -24,4 +24,6 @@ public interface ITaskService {
     int insert(Task record);
 
     int insertUsing(TaskUsing record);
+
+    Task selectBytTaskId(String tTaskId);
 }

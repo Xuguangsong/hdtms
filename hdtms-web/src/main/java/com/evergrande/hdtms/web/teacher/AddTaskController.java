@@ -38,9 +38,7 @@ public class AddTaskController {
         record.settCreateTime(new Date());
         record.settOperateDate(new Date());
         record.settOperator("121");
-        logger.info(record.toString());
-        int res = taskService.insert(record);
-        logger.info("msg : "+ res);
-        return new AjaxResultPo(true, res);
+        taskService.insert(record);
+        return new AjaxResultPo(true);
     }
 }
