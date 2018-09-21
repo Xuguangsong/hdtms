@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.evergrande.hdtms.mapper.teacher.TaskUsingMapper" >
+  <resultMap id="BaseResultMap" type="com.evergrande.hdtms.model.teacher.TaskUsing" >
+    <id column="t_pk_id" property="tPkId" jdbcType="INTEGER" />
+    <result column="t_task_id" property="tTaskId" jdbcType="CHAR" />
+    <result column="t_tutor_id" property="tTutorId" jdbcType="CHAR" />
+    <result column="t_stu_id" property="tStuId" jdbcType="CHAR" />
+    <result column="t_name" property="tName" jdbcType="VARCHAR" />
+    <result column="t_category" property="tCategory" jdbcType="INTEGER" />
+    <result column="t_content" property="tContent" jdbcType="VARCHAR" />
+    <result column="t_progress" property="tProgress" jdbcType="INTEGER" />
+    <result column="t_time" property="tTime" jdbcType="INTEGER" />
+    <result column="t_feedback" property="tFeedback" jdbcType="VARCHAR" />
+    <result column="t_start_date" property="tStartDate" jdbcType="DATE" />
+    <result column="t_expiration_date" property="tExpirationDate" jdbcType="DATE" />
+    <result column="t_finish_date" property="tFinishDate" jdbcType="DATE" />
+    <result column="t_creater" property="tCreater" jdbcType="VARCHAR" />
+    <result column="t_create_time" property="tCreateTime" jdbcType="TIMESTAMP" />
+    <result column="t_operator" property="tOperator" jdbcType="VARCHAR" />
+    <result column="t_operate_date" property="tOperateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    t_pk_id, t_task_id, t_tutor_id, t_stu_id, t_name, t_category, t_content, t_progress, 
+    t_time, t_feedback, t_start_date, t_expiration_date, t_finish_date, t_creater, t_create_time, 
+    t_operator, t_operate_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.evergrande.hdtms.model.teacher.TaskUsingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from task_using
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from task_using
+    where t_pk_id = #{tPkId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from task_using
+    where t_pk_id = #{tPkId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.evergrande.hdtms.model.teacher.TaskUsingExample" >
+    delete from task_using
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.evergrande.hdtms.model.teacher.TaskUsing" >
+    insert into task_using (t_pk_id, t_task_id, t_tutor_id, 
+      t_stu_id, t_name, t_category, 
+      t_content, t_progress, t_time, 
+      t_feedback, t_start_date, t_expiration_date, 
+      t_finish_date, t_creater, t_create_time, 
+      t_operator, t_operate_date)
+    values (#{tPkId,jdbcType=INTEGER}, #{tTaskId,jdbcType=CHAR}, #{tTutorId,jdbcType=CHAR}, 
+      #{tStuId,jdbcType=CHAR}, #{tName,jdbcType=VARCHAR}, #{tCategory,jdbcType=INTEGER}, 
+      #{tContent,jdbcType=VARCHAR}, #{tProgress,jdbcType=INTEGER}, #{tTime,jdbcType=INTEGER}, 
+      #{tFeedback,jdbcType=VARCHAR}, #{tStartDate,jdbcType=DATE}, #{tExpirationDate,jdbcType=DATE}, 
+      #{tFinishDate,jdbcType=DATE}, #{tCreater,jdbcType=VARCHAR}, #{tCreateTime,jdbcType=TIMESTAMP}, 
+      #{tOperator,jdbcType=VARCHAR}, #{tOperateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.evergrande.hdtms.model.teacher.TaskUsing" >
+    insert into task_using
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tPkId != null" >
+        t_pk_id,
+      </if>
+      <if test="tTaskId != null" >
+        t_task_id,
+      </if>
+      <if test="tTutorId != null" >
+        t_tutor_id,
+      </if>
+      <if test="tStuId != null" >
+        t_stu_id,
+      </if>
+      <if test="tName != null" >
+        t_name,
+      </if>
+      <if test="tCategory != null" >
+        t_category,
+      </if>
+      <if test="tContent != null" >
+        t_content,
+      </if>
+      <if test="tProgress != null" >
+        t_progress,
+      </if>
+      <if test="tTime != null" >
+        t_time,
+      </if>
+      <if test="tFeedback != null" >
+        t_feedback,
+      </if>
+      <if test="tStartDate != null" >
+        t_start_date,
+      </if>
+      <if test="tExpirationDate != null" >
+        t_expiration_date,
+      </if>
+      <if test="tFinishDate != null" >
+        t_finish_date,
+      </if>
+      <if test="tCreater != null" >
+        t_creater,
+      </if>
+      <if test="tCreateTime != null" >
+        t_create_time,
+      </if>
+      <if test="tOperator != null" >
+        t_operator,
+      </if>
+      <if test="tOperateDate != null" >
+        t_operate_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tPkId != null" >
+        #{tPkId,jdbcType=INTEGER},
+      </if>
+      <if test="tTaskId != null" >
+        #{tTaskId,jdbcType=CHAR},
+      </if>
+      <if test="tTutorId != null" >
+        #{tTutorId,jdbcType=CHAR},
+      </if>
+      <if test="tStuId != null" >
+        #{tStuId,jdbcType=CHAR},
+      </if>
+      <if test="tName != null" >
+        #{tName,jdbcType=VARCHAR},
+      </if>
+      <if test="tCategory != null" >
+        #{tCategory,jdbcType=INTEGER},
+      </if>
+      <if test="tContent != null" >
+        #{tContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tProgress != null" >
+        #{tProgress,jdbcType=INTEGER},
+      </if>
+      <if test="tTime != null" >
+        #{tTime,jdbcType=INTEGER},
+      </if>
+      <if test="tFeedback != null" >
+        #{tFeedback,jdbcType=VARCHAR},
+      </if>
+      <if test="tStartDate != null" >
+        #{tStartDate,jdbcType=DATE},
+      </if>
+      <if test="tExpirationDate != null" >
+        #{tExpirationDate,jdbcType=DATE},
+      </if>
+      <if test="tFinishDate != null" >
+        #{tFinishDate,jdbcType=DATE},
+      </if>
+      <if test="tCreater != null" >
+        #{tCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="tCreateTime != null" >
+        #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tOperator != null" >
+        #{tOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="tOperateDate != null" >
+        #{tOperateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.evergrande.hdtms.model.teacher.TaskUsingExample" resultType="java.lang.Integer" >
+    select count(*) from task_using
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update task_using
+    <set >
+      <if test="record.tPkId != null" >
+        t_pk_id = #{record.tPkId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tTaskId != null" >
+        t_task_id = #{record.tTaskId,jdbcType=CHAR},
+      </if>
+      <if test="record.tTutorId != null" >
+        t_tutor_id = #{record.tTutorId,jdbcType=CHAR},
+      </if>
+      <if test="record.tStuId != null" >
+        t_stu_id = #{record.tStuId,jdbcType=CHAR},
+      </if>
+      <if test="record.tName != null" >
+        t_name = #{record.tName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tCategory != null" >
+        t_category = #{record.tCategory,jdbcType=INTEGER},
+      </if>
+      <if test="record.tContent != null" >
+        t_content = #{record.tContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tProgress != null" >
+        t_progress = #{record.tProgress,jdbcType=INTEGER},
+      </if>
+      <if test="record.tTime != null" >
+        t_time = #{record.tTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.tFeedback != null" >
+        t_feedback = #{record.tFeedback,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tStartDate != null" >
+        t_start_date = #{record.tStartDate,jdbcType=DATE},
+      </if>
+      <if test="record.tExpirationDate != null" >
+        t_expiration_date = #{record.tExpirationDate,jdbcType=DATE},
+      </if>
+      <if test="record.tFinishDate != null" >
+        t_finish_date = #{record.tFinishDate,jdbcType=DATE},
+      </if>
+      <if test="record.tCreater != null" >
+        t_creater = #{record.tCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tCreateTime != null" >
+        t_create_time = #{record.tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tOperator != null" >
+        t_operator = #{record.tOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tOperateDate != null" >
+        t_operate_date = #{record.tOperateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update task_using
+    set t_pk_id = #{record.tPkId,jdbcType=INTEGER},
+      t_task_id = #{record.tTaskId,jdbcType=CHAR},
+      t_tutor_id = #{record.tTutorId,jdbcType=CHAR},
+      t_stu_id = #{record.tStuId,jdbcType=CHAR},
+      t_name = #{record.tName,jdbcType=VARCHAR},
+      t_category = #{record.tCategory,jdbcType=INTEGER},
+      t_content = #{record.tContent,jdbcType=VARCHAR},
+      t_progress = #{record.tProgress,jdbcType=INTEGER},
+      t_time = #{record.tTime,jdbcType=INTEGER},
+      t_feedback = #{record.tFeedback,jdbcType=VARCHAR},
+      t_start_date = #{record.tStartDate,jdbcType=DATE},
+      t_expiration_date = #{record.tExpirationDate,jdbcType=DATE},
+      t_finish_date = #{record.tFinishDate,jdbcType=DATE},
+      t_creater = #{record.tCreater,jdbcType=VARCHAR},
+      t_create_time = #{record.tCreateTime,jdbcType=TIMESTAMP},
+      t_operator = #{record.tOperator,jdbcType=VARCHAR},
+      t_operate_date = #{record.tOperateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.evergrande.hdtms.model.teacher.TaskUsing" >
+    update task_using
+    <set >
+      <if test="tTaskId != null" >
+        t_task_id = #{tTaskId,jdbcType=CHAR},
+      </if>
+      <if test="tTutorId != null" >
+        t_tutor_id = #{tTutorId,jdbcType=CHAR},
+      </if>
+      <if test="tStuId != null" >
+        t_stu_id = #{tStuId,jdbcType=CHAR},
+      </if>
+      <if test="tName != null" >
+        t_name = #{tName,jdbcType=VARCHAR},
+      </if>
+      <if test="tCategory != null" >
+        t_category = #{tCategory,jdbcType=INTEGER},
+      </if>
+      <if test="tContent != null" >
+        t_content = #{tContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tProgress != null" >
+        t_progress = #{tProgress,jdbcType=INTEGER},
+      </if>
+      <if test="tTime != null" >
+        t_time = #{tTime,jdbcType=INTEGER},
+      </if>
+      <if test="tFeedback != null" >
+        t_feedback = #{tFeedback,jdbcType=VARCHAR},
+      </if>
+      <if test="tStartDate != null" >
+        t_start_date = #{tStartDate,jdbcType=DATE},
+      </if>
+      <if test="tExpirationDate != null" >
+        t_expiration_date = #{tExpirationDate,jdbcType=DATE},
+      </if>
+      <if test="tFinishDate != null" >
+        t_finish_date = #{tFinishDate,jdbcType=DATE},
+      </if>
+      <if test="tCreater != null" >
+        t_creater = #{tCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="tCreateTime != null" >
+        t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tOperator != null" >
+        t_operator = #{tOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="tOperateDate != null" >
+        t_operate_date = #{tOperateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where t_pk_id = #{tPkId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.evergrande.hdtms.model.teacher.TaskUsing" >
+    update task_using
+    set t_task_id = #{tTaskId,jdbcType=CHAR},
+      t_tutor_id = #{tTutorId,jdbcType=CHAR},
+      t_stu_id = #{tStuId,jdbcType=CHAR},
+      t_name = #{tName,jdbcType=VARCHAR},
+      t_category = #{tCategory,jdbcType=INTEGER},
+      t_content = #{tContent,jdbcType=VARCHAR},
+      t_progress = #{tProgress,jdbcType=INTEGER},
+      t_time = #{tTime,jdbcType=INTEGER},
+      t_feedback = #{tFeedback,jdbcType=VARCHAR},
+      t_start_date = #{tStartDate,jdbcType=DATE},
+      t_expiration_date = #{tExpirationDate,jdbcType=DATE},
+      t_finish_date = #{tFinishDate,jdbcType=DATE},
+      t_creater = #{tCreater,jdbcType=VARCHAR},
+      t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      t_operator = #{tOperator,jdbcType=VARCHAR},
+      t_operate_date = #{tOperateDate,jdbcType=TIMESTAMP}
+    where t_pk_id = #{tPkId,jdbcType=INTEGER}
+  </update>
+</mapper>

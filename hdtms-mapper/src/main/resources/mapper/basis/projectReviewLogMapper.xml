@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.evergrande.hdtms.model.mapper.basis.projectReviewLogMapper" >
+  <resultMap id="BaseResultMap" type="com.evergrande.hdtms.model.basis.projectReviewLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="review_id" property="reviewId" jdbcType="VARCHAR" />
+    <result column="project_id" property="projectId" jdbcType="INTEGER" />
+    <result column="theme" property="theme" jdbcType="VARCHAR" />
+    <result column="private_id" property="privateId" jdbcType="VARCHAR" />
+    <result column="review_operate" property="reviewOperate" jdbcType="TINYINT" />
+    <result column="operator_id" property="operatorId" jdbcType="INTEGER" />
+    <result column="operator_comment" property="operatorComment" jdbcType="VARCHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modifier_id" property="modifierId" jdbcType="INTEGER" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, review_id, project_id, theme, private_id, review_operate, operator_id, operator_comment, 
+    creator_id, create_time, modifier_id, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from project_review_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from project_review_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.evergrande.hdtms.model.basis.projectReviewLog" >
+    insert into project_review_log (id, review_id, project_id, 
+      theme, private_id, review_operate, 
+      operator_id, operator_comment, creator_id, 
+      create_time, modifier_id, modify_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{reviewId,jdbcType=VARCHAR}, #{projectId,jdbcType=INTEGER}, 
+      #{theme,jdbcType=VARCHAR}, #{privateId,jdbcType=VARCHAR}, #{reviewOperate,jdbcType=TINYINT}, 
+      #{operatorId,jdbcType=INTEGER}, #{operatorComment,jdbcType=VARCHAR}, #{creatorId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifierId,jdbcType=INTEGER}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.evergrande.hdtms.model.basis.projectReviewLog" >
+    insert into project_review_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="reviewId != null" >
+        review_id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="theme != null" >
+        theme,
+      </if>
+      <if test="privateId != null" >
+        private_id,
+      </if>
+      <if test="reviewOperate != null" >
+        review_operate,
+      </if>
+      <if test="operatorId != null" >
+        operator_id,
+      </if>
+      <if test="operatorComment != null" >
+        operator_comment,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifierId != null" >
+        modifier_id,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="reviewId != null" >
+        #{reviewId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="theme != null" >
+        #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="privateId != null" >
+        #{privateId,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewOperate != null" >
+        #{reviewOperate,jdbcType=TINYINT},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="operatorComment != null" >
+        #{operatorComment,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierId != null" >
+        #{modifierId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.evergrande.hdtms.model.basis.projectReviewLog" >
+    update project_review_log
+    <set >
+      <if test="reviewId != null" >
+        review_id = #{reviewId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="theme != null" >
+        theme = #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="privateId != null" >
+        private_id = #{privateId,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewOperate != null" >
+        review_operate = #{reviewOperate,jdbcType=TINYINT},
+      </if>
+      <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="operatorComment != null" >
+        operator_comment = #{operatorComment,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierId != null" >
+        modifier_id = #{modifierId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.evergrande.hdtms.model.basis.projectReviewLog" >
+    update project_review_log
+    set review_id = #{reviewId,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=INTEGER},
+      theme = #{theme,jdbcType=VARCHAR},
+      private_id = #{privateId,jdbcType=VARCHAR},
+      review_operate = #{reviewOperate,jdbcType=TINYINT},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      operator_comment = #{operatorComment,jdbcType=VARCHAR},
+      creator_id = #{creatorId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modifier_id = #{modifierId,jdbcType=INTEGER},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
